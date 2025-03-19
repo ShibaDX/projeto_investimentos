@@ -1,16 +1,17 @@
 <?php
-//inclui_compra.php
-    require_once 'classes/Compra.php';
+    require_once 'classes/Compra.php'; // importa o arquivo Compra.php
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $compra = new Compra();
-        $compra->adicionarCompra($_POST['ativo'], $_POST['quantidade'], $_POST['valor_unitario'], $_POST['data_compra']);
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') { // verifica se o método da requisição é POST, ou seja, o código dentro do if só é executado quando o formulário for enviado
+
+        $compra = new Compra(); // cria um objeto da classe Compra
+
+        $compra->adicionarCompra($_POST['ativo'], $_POST['quantidade'], $_POST['valor_unitario'], $_POST['data_compra']); // chama o método adicionarCompra() da classe Compra, passando os valores que foram enviados pelo formulário HTML
         echo "Compra adicionada com sucesso!";
     }
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
