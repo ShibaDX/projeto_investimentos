@@ -4,7 +4,7 @@ class Database // A classe Database é responsável por estabelecer uma conexão
 {
     private $host = "localhost"; // Endereço do servidor do banco de dados
     private $port = "3306"; // porta do SQL
-    private $db = "bolsa_de_valores"; // nome do banco de dados
+    private $db = "bd_investimentos"; // nome do banco de dados
     private $user = "root"; // nome do usuário do banco de dados
     private $pass = ""; // senha do banco de dados
     private $pdo; // variável que armazenará a conexão com o banco de dados
