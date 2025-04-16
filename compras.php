@@ -1,11 +1,22 @@
 <?php
-    require_once 'classes/Compra.php'; // importa o arquivo Compra.php
+    // Inclui o arquivo que contém a definição da classe Compra (responsável por interagir com o banco de dados)
+    require_once 'classes/Compra.php';
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') { // verifica se o método da requisição é POST, ou seja, o código dentro do if só é executado quando o formulário for enviado
+    // Verifica se a requisição foi feita via método POST (ou seja, se o formulário foi enviado)
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-        $compra = new Compra(); // cria um objeto da classe Compra
+        // Cria uma nova instância da classe Compra
+        $compra = new Compra();
 
-        $compra->adicionarCompra($_POST['ativo'], $_POST['quantidade'], $_POST['valor_unitario'], $_POST['data_compra']); // chama o método adicionarCompra() da classe Compra, passando os valores que foram enviados pelo formulário HTML
+        // Chama o método adicionarCompra() passando os dados recebidos pelo formulário via POST
+        $compra->adicionarCompra(
+            $_POST['ativo'],           // Nome ou código do ativo (ex: PETR4, ITUB3, etc.)
+            $_POST['quantidade'],      // Quantidade comprada
+            $_POST['valor_unitario'],  // Valor de cada unidade do ativo
+            $_POST['data_compra']      // Data da compra
+        );
+
+        // Exibe uma mensagem de sucesso após a inserção
         echo "Compra adicionada com sucesso!";
     }
 ?>
@@ -19,22 +30,34 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+<?php require_once 'header.php'; ?>
+
     <h1>Cadastrar compras de ativo</h1>
 
+    <!-- Formulário para envio de dados de compra -->
+    <!-- O método POST envia os dados de forma segura ao servidor -->
     <form method="POST">
         <label for="ativo">Ativo</label>
-        <input type="text" id="ativo" name="ativo" required>
+        <input type="text" id="ativo" name="ativo" required> <!-- Campo para o nome ou código do ativo -->
+
         <br>
+
         <label for="quantidade">Quantidade</label>
-        <input type="number" id="quantidade" name="quantidade" required>
+        <input type="number" id="quantidade" name="quantidade" required> <!-- Campo para quantidade adquirida -->
+
         <br>
+
         <label for="valor_unitario">Valor Unitário</label>
-        <input type="number" name="valor_unitario" id="valor_unitario" required>
+        <input type="number" name="valor_unitario" id="valor_unitario" required> <!-- Campo para valor de cada unidade -->
+
         <br>
+
         <label for="data_compra">Data da Compra</label>
-        <input type="date" name="data_compra" id="data_compra" required>
+        <input type="date" name="data_compra" id="data_compra" required> <!-- Campo para a data da compra -->
+
         <br>
-        <button type="submit">Cadastrar</button>
+
+        <button type="submit">Cadastrar</button> <!-- Botão que envia o formulário -->
     </form>
 </body>
 </html>

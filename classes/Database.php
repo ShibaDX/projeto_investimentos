@@ -1,28 +1,34 @@
 <?php
 
-class Database // A classe Database é responsável por estabelecer uma conexão com o banco de dados MySQL usando PDO (PHP Data Objects).
+class Database // A classe Database é responsável por estabelecer uma conexão com o banco de dados MySQL utilizando PDO (PHP Data Objects).
 {
-    private $host = "localhost"; // Endereço do servidor do banco de dados
-    private $port = "3306"; // porta do SQL
-    private $db = "bd_investimentos"; // nome do banco de dados
-    private $user = "root"; // nome do usuário do banco de dados
-    private $pass = ""; // senha do banco de dados
-    private $pdo; // variável que armazenará a conexão com o banco de dados
+    private $host = "localhost"; // Endereço do servidor do banco de dados (geralmente 'localhost' em ambientes locais)
+    private $port = "3306"; // Porta padrão utilizada pelo MySQL
+    private $db = "bd_investimentos"; // Nome do banco de dados que será utilizado na conexão
+    private $user = "root"; // Nome de usuário com permissões para acessar o banco de dados
+    private $pass = ""; // Senha correspondente ao usuário
+    private $pdo; // Propriedade que armazenará a instância da conexão PDO
 
-    public function connect() // método responsável por criar e retornar a conexão com o banco de dados
+    public function connect() // Método responsável por criar e retornar a conexão com o banco de dados
     {
-        if (!$this->pdo) { // verifica se a conexão já existe. Isso evita criar múltiplas conexões desnecessárias. Se a conexão ainda não foi estabelecida, ele cria uma
+        // Verifica se a conexão ainda não foi criada. Isso evita múltiplas conexões desnecessárias.
+        if (!$this->pdo) {
             try {
-                // mysql:host=localhost;port=3306;dbname=bolsa_de_valores
-                $dns = "mysql:host={$this->host};port={$this->port};dbname={$this->db}"; // monta a string de conexão
-                $this->pdo = new PDO($dns, $this->user, $this->pass); // cria a conexão com o banco usando PDO
-                $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // Configura PDO para lançar exceções caso ocorra um erro.
-            } catch (\PDOException $th) { // Captura qualquer erro na conexão e exibe uma mensagem.
-                die("Erro ao conectar ao banco de dados: " . $th->getMessage()); // mata o script se houver erro
+                // Monta a DSN (Data Source Name), que define as informações da conexão: tipo de banco, host, porta e nome do banco
+                $dns = "mysql:host={$this->host};port={$this->port};dbname={$this->db}";
+                
+                // Cria uma nova instância de PDO com as credenciais fornecidas
+                $this->pdo = new PDO($dns, $this->user, $this->pass);
+                
+                // Define o modo de erro do PDO para lançar exceções em caso de falhas (mais fácil de debugar)
+                $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            } catch (\PDOException $th) {
+                // Captura qualquer exceção lançada durante a tentativa de conexão e encerra o script com uma mensagem de erro
+                die("Erro ao conectar ao banco de dados: " . $th->getMessage());
             }
         }
 
-        return $this->pdo; // retorno da conexão
-        // Se a conexão foi estabelecida com sucesso, o método retorna o objeto PDO, que poderá ser usado para executar consultas SQL.
+        // Retorna o objeto PDO para que ele possa ser utilizado em outras operações com o banco de dados
+        return $this->pdo;
     }
 }

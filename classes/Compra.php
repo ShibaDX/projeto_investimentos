@@ -6,9 +6,10 @@ class Compra
 {
     private $db; // será usada para armazenar a conexão com o banco de dados, permitindo que a classe execute consultas SQL.
 
-
+    // Construtor da classe Compra, chamado automaticamente ao criar um novo objeto da classe
     public function __construct()
     {
+        // Cria uma nova instância da classe Database e chama o método 'connect', armazenando a conexão na propriedade $db
         $this->db = (new Database())->connect();
     }
 
@@ -19,7 +20,7 @@ class Compra
         $query = $this->db->prepare($sql);
         // A conexão $db chama o método prepare(), que prepara a consulta SQL para execução.
 
-        $query->execute([ 
+        $query->execute([
             //os valores reais dos parâmetros são passados para o método execute(),substituindo os placeholders.
             'ativo' => $ativo,
             'quantidade' => $quantidade,
