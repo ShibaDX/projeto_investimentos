@@ -132,3 +132,8 @@ td {
     padding: 10px;
     text-align: left;
 }
+
+.titulo h1 {
+    margin-left: 20px;
+    display: flex;
+}

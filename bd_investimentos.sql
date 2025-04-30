@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 16/04/2025 às 00:17
+-- Tempo de geração: 30/04/2025 às 03:05
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.0.30
 
@@ -37,6 +37,14 @@ CREATE TABLE `compras` (
   `data_compra` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Despejando dados para a tabela `compras`
+--
+
+INSERT INTO `compras` (`id`, `ativo`, `quantidade`, `valor_unitario`, `data_compra`) VALUES
+(1, 'CPEL6', 5, 10.00, '2025-04-29'),
+(2, 'ALFA', 14, 3.00, '2025-04-28');
+
 -- --------------------------------------------------------
 
 --
@@ -49,6 +57,14 @@ CREATE TABLE `dividendos` (
   `valor` decimal(10,2) NOT NULL,
   `data_recebimento` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `dividendos`
+--
+
+INSERT INTO `dividendos` (`id`, `ativo`, `valor`, `data_recebimento`) VALUES
+(1, 'CPEL6', 55.00, '2025-04-29'),
+(2, 'ALFA', 85.00, '2025-04-29');
 
 --
 -- Índices para tabelas despejadas
@@ -74,13 +90,13 @@ ALTER TABLE `dividendos`
 -- AUTO_INCREMENT de tabela `compras`
 --
 ALTER TABLE `compras`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `dividendos`
 --
 ALTER TABLE `dividendos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

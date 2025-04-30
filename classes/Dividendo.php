@@ -22,15 +22,21 @@ class Dividendo
         // Cria a instrução SQL para inserir os dados na tabela 'dividendos'
         $sql = "INSERT INTO dividendos (ativo, valor, data_recebimento) 
                 VALUES (:ativo, :valor, :data_recebimento)";
-        
+
         // Prepara a query para evitar SQL Injection e permitir o uso de parâmetros nomeados
         $query = $this->db->prepare($sql);
-        
+
         // Executa a query substituindo os parâmetros pelos valores recebidos
         $query->execute([
             'ativo' => $ativo,
             'valor' => $valor,
             'data_recebimento' => $dataRecebimento
         ]);
+    }
+
+    public function calcularDividendosPorAtivo() {
+        $sql = "SELECT ativo, SUM(valor) AS total_dividendos FROM dividendos GROUP BY ativo";
+        $query = $this->db->query($sql);
+        return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 }
