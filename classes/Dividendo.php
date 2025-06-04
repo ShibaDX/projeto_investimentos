@@ -39,4 +39,10 @@ class Dividendo
         $query = $this->db->query($sql);
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
+
+        public function listarDividendos() {
+        $sql = "SELECT * FROM dividendos";
+        $stmt = $this->db->query($sql);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
